@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:incident/pages/incidentReportPage.dart';
 import 'package:incident/widgets/incident_list.dart';
+import 'package:provider/provider.dart';
+import 'package:incident/viewModels/incidentReportViewModel.dart';
 
 class IncidentListPage extends StatelessWidget {
 
@@ -8,7 +10,9 @@ class IncidentListPage extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => IncidentReportPage(),
+          builder: (context) => ChangeNotifierProvider(
+              create: (BuildContext context) => IncidentReportViewModel(),
+              child: IncidentReportPage()),
           fullscreenDialog: true),
     );
   }
