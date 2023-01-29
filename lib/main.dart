@@ -1,7 +1,8 @@
 import 'dart:io';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'pages/incidentListPage.dart';
+import 'package:incident/viewModels/incidentListViewModel.dart';
 
 
 class MyHttpOverrides extends HttpOverrides{
@@ -22,7 +23,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: IncidentListPage(),
+      home: ChangeNotifierProvider(
+          create: (BuildContext context) => IncidentListViewModel(),
+          child: IncidentListPage()),
     );
   }
 }
