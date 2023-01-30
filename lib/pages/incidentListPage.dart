@@ -14,7 +14,7 @@ class IncidentListPage extends StatefulWidget {
 class _IncidentListPageState extends State<IncidentListPage> {
 
   Future<void> _navigateToReportPage(BuildContext context) async {
-    Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => ChangeNotifierProvider(
@@ -22,10 +22,23 @@ class _IncidentListPageState extends State<IncidentListPage> {
               child: IncidentReportPage()),
           fullscreenDialog: true),
     );
+
+    _populateIncidents();
   }
 
   void _populateIncidents(){
     Provider.of<IncidentListViewModel>(context, listen: false).getAllIncidents();
+  }
+
+  Widget _updateUI(IncidentListViewModel vm){
+    switch(vm.loadingStatus){
+      case LoadingStatus.loading :
+        return Align(child: CircularProgressIndicator(),);
+      case LoadingStatus.empty :
+        return Align(child: Text('No incidents'),);
+      case LoadingStatus.success :
+        return IncidentList(incidents: vm.incidents);
+    }
   }
 
   @override
@@ -45,7 +58,7 @@ class _IncidentListPageState extends State<IncidentListPage> {
       ),
       body: Stack(
         children: [
-          IncidentList(incidents: vm.incidents,),
+          _updateUI(vm),
           SafeArea(
             child: Align(
               alignment: Alignment.bottomRight,

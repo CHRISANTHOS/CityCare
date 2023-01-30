@@ -3,6 +3,7 @@ import 'package:incident/viewModels/incidentViewModel.dart';
 
 class IncidentList extends StatelessWidget {
 
+
   final List<IncidentViewModel> incidents;
   IncidentList({required this.incidents});
 
