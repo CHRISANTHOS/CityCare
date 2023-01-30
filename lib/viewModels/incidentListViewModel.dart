@@ -21,7 +21,4 @@ class IncidentListViewModel extends ChangeNotifier{
     loadingStatus = incidents.isEmpty ? LoadingStatus.empty: LoadingStatus.success;
     notifyListeners();
   }
-
-
-
 }

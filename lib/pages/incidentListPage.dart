@@ -22,7 +22,6 @@ class _IncidentListPageState extends State<IncidentListPage> {
               child: IncidentReportPage()),
           fullscreenDialog: true),
     );
-
     _populateIncidents();
   }
 
@@ -33,9 +32,9 @@ class _IncidentListPageState extends State<IncidentListPage> {
   Widget _updateUI(IncidentListViewModel vm){
     switch(vm.loadingStatus){
       case LoadingStatus.loading :
-        return Align(child: CircularProgressIndicator(),);
+        return const Align(child: CircularProgressIndicator(),);
       case LoadingStatus.empty :
-        return Align(child: Text('No incidents'),);
+        return const Align(child: Text('No incidents'),);
       case LoadingStatus.success :
         return IncidentList(incidents: vm.incidents);
     }

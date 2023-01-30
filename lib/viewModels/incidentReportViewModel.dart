@@ -8,10 +8,8 @@ class IncidentReportViewModel extends ChangeNotifier{
   String? description;
 
   Future<void> saveIncident()async{
-
     final incident = Incidents(title: title!, description: description!);
     await Webservices().saveIncident(incident);
-
   }
 
 }
