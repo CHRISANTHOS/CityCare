@@ -1,20 +1,44 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:incident/viewModels/incidentReportViewModel.dart';
+import 'package:image_picker/image_picker.dart';
 
-class IncidentReportPage extends StatelessWidget {
+class IncidentReportPage extends StatefulWidget {
+
+  @override
+  State<IncidentReportPage> createState() => _IncidentReportPageState();
+}
+
+class _IncidentReportPageState extends State<IncidentReportPage> {
+  IncidentReportViewModel? _incidentReportViewModel;
+
+  final ImagePicker _picker = ImagePicker();
+
+  void _showPhotoAlbum()async{
+    final image = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _incidentReportViewModel!.imagePath = image!.path;
+
+    });
+  }
 
   void _fetchImage(BuildContext context){
     showModalBottomSheet(context: context, builder: (context){
       return Container(
         height: 150,
         child: Column(
-          children: const [
+          children: [
             ListTile(
               leading: Icon(Icons.camera),
               title: Text('Take Photo'),
             ),
             ListTile(
+              onTap: (){
+                _showPhotoAlbum();
+                Navigator.of(context).pop();
+              },
               leading: Icon(Icons.photo_album),
               title: Text('Select from gallery'),
             ),
@@ -22,6 +46,13 @@ class IncidentReportPage extends StatelessWidget {
         ),
       );
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _incidentReportViewModel = Provider.of<IncidentReportViewModel>(context, listen: false);
   }
   @override
   Widget build(BuildContext context) {
@@ -34,7 +65,7 @@ class IncidentReportPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.network('https://cdn.windowsreport.com/wp-content/uploads/2020/04/Best-software-for-abstract-art.jpg'),
+             vm.imagePath == null ?  Image.network('https://cdn.windowsreport.com/wp-content/uploads/2020/04/Best-software-for-abstract-art.jpg') : Image.file(File(vm.imagePath!)),
             TextButton(onPressed: (){
               _fetchImage(context);
             }, child: Text(

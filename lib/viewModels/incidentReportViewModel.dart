@@ -6,6 +6,7 @@ class IncidentReportViewModel extends ChangeNotifier{
 
   String? title;
   String? description;
+  String? imagePath;
 
   Future<void> saveIncident()async{
     final incident = Incidents(title: title!, description: description!);
