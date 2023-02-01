@@ -53,7 +53,7 @@ class _IncidentListPageState extends State<IncidentListPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Incidents'),
+        title: const Text('Incidents'),
       ),
       body: Stack(
         children: [
@@ -67,7 +67,7 @@ class _IncidentListPageState extends State<IncidentListPage> {
                   onPressed: (){
                     _navigateToReportPage(context);
                   },
-                  child: Icon(Icons.add),
+                  child: const Icon(Icons.add),
                 ),
               ),
             ),

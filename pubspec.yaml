@@ -39,6 +39,7 @@ dependencies:
   dio: ^4.0.6
   provider: ^6.0.5
   image_picker: ^0.8.6+1
+  camera: ^0.10.3
 
 dev_dependencies:
   flutter_test:
